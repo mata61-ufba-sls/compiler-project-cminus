@@ -11,9 +11,7 @@ In particular, in addition to the AST data structure, you will be using the symb
 ## Check List for Semantic Analysis (non exhaustive):
 
 ```<program> ::= <declaration-list>
-  
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
-
 <declaration> ::= <var-declaration> | <fun-declaration>
 ```  
 
@@ -24,7 +22,6 @@ In particular, in addition to the AST data structure, you will be using the symb
 
 ``` 
 <var-declaration> ::= <type-specifier> ID ; | <type-specifier> ID [ NUM ] ;
-
 <type-specifier> ::= int | void
 ```
 
@@ -49,16 +46,17 @@ In particular, in addition to the AST data structure, you will be using the symb
 - [   ]  Non-array parameters should not match arrays (array accesses/subscripts are valid, however)
 
 - [   ]  Functions can be recursive (to the limit that declarations before-use allow)
+
 ```
-
-
 <compound-stmt> ::= { <local-declarations> <statement-list> }
+``` 
 
 - [   ]  Variable declaration has the same scope as the set of statements in braces and overrides the visibility of global variables.
 
 
-
+``` 
 <return-stmt> ::= return ; | return <expression> ;
+``` 
 
 - [   ]  Functions not declared as void must return values.
 
@@ -81,24 +79,20 @@ In particular, in addition to the AST data structure, you will be using the symb
 - [   ]  Type checking of the expressions vs variable types
 
 
-
+```
 <factor> ::= ( <expression> ) | <var> | <call> | NUM
-  
+``` 
 
 - [   ]  Check correct usage of function return
 
 - [   ]  Array variables must be indexed, except in expressions containing a single ID (function calls)
 
 
-
+```
 <call> ::= ID ( <args> )
-  
-
 <args> ::= <arg-list> | empty
-  
-
 <arg-list> ::= <arg-list> , <expression> | <expression>
-
+``` 
 
 
 - [  ]  Functions need to be declared before being called
@@ -106,12 +100,10 @@ In particular, in addition to the AST data structure, you will be using the symb
 - [  ]  The number of arguments in a function call must be equal to the number of parameters in the declaration
 
 
-
+```
 int input(void)  {...}
-
-
 void output(int x) {...}
-
+```
 
 - [  ]  Make sure to include these names (builtin functions)
 
@@ -120,8 +112,7 @@ void output(int x) {...}
 
 
 ### Other general checks
-
-``` 
+ 
 - [  ]  Using a function name in a variable name context (and vice-versa) should be disallowed.
 
 - [  ]  Function redeclared as function
@@ -158,10 +149,10 @@ void output(int x) {...}
 
 - [  ]  The last declaration name is not "main".
 
-- [  ]  The last declaration does not return void.
+[  ]  The last declaration does not return void.
 
-- [  ]  The last declaration has more than zero params.
-```
+[  ]  The last declaration has more than zero params.
+
 
 ### Reference compiler (syntactic/semantic phase)
 
