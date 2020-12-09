@@ -12,39 +12,31 @@ In particular, in addition to the AST data structure, you will be using the symb
 
 ```<program> ::= <declaration-list>
   
-
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
-  
 
-<declaration> ::= <var-declaration> | <fun-declaration>``` 
-  
+<declaration> ::= <var-declaration> | <fun-declaration>
+```  
 
 - [   ]  All variables and functions must be declared before they are used
 
 - [   ]  The last declaration in a program needs to be a declaration of the form void main (void)
 
 
-
+``` 
 <var-declaration> ::= <type-specifier> ID ; | <type-specifier> ID [ NUM ] ;
 
 <type-specifier> ::= int | void
-  
+```
 
 - [   ]  Variable declarations can only have int type.
 
 
-
+``` 
 <fun-declaration> ::= <type-specifier> ID ( <params> ) <compound-stmt>
-  
-
 <params> ::= <param-list> | void
-  
-
 <param-list> ::= <param-list> , <param> | <param>
-  
-
 <param> ::= <type-specifier> ID | <type-specifier> ID [ ] 
-  
+```
 
 - [   ]  Parameter types for variable names cannot be void (except main function)
 
@@ -57,7 +49,7 @@ In particular, in addition to the AST data structure, you will be using the symb
 - [   ]  Non-array parameters should not match arrays (array accesses/subscripts are valid, however)
 
 - [   ]  Functions can be recursive (to the limit that declarations before-use allow)
-
+```
 
 
 <compound-stmt> ::= { <local-declarations> <statement-list> }
@@ -73,13 +65,10 @@ In particular, in addition to the AST data structure, you will be using the symb
 - [   ]  Functions declared as void must not return values.
 
 
-
+``` 
 <expression> ::= <var> = <expression> | <simple-expression>
-  
-
 <var> ::= ID | ID [ <expression> ]
-
-...
+``` 
 
 - [   ]  Variable must be declared.
 
@@ -132,6 +121,7 @@ void output(int x) {...}
 
 ### Other general checks
 
+``` 
 - [  ]  Using a function name in a variable name context (and vice-versa) should be disallowed.
 
 - [  ]  Function redeclared as function
@@ -171,7 +161,7 @@ void output(int x) {...}
 - [  ]  The last declaration does not return void.
 
 - [  ]  The last declaration has more than zero params.
-
+```
 
 ### Reference compiler (syntactic/semantic phase)
 
