@@ -10,13 +10,13 @@ In particular, in addition to the AST data structure, you will be using the symb
 
 ## Check List for Semantic Analysis (non exhaustive):
 
-<program> ::= <declaration-list>
+```<program> ::= <declaration-list>
   
 
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
   
 
-<declaration> ::= <var-declaration> | <fun-declaration>
+<declaration> ::= <var-declaration> | <fun-declaration>``` 
   
 
 - [   ]  All variables and functions must be declared before they are used
