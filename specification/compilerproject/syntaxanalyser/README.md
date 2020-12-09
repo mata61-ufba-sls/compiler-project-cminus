@@ -37,7 +37,7 @@ Recursivamente, cada operando pode ser definido por outro operador; por exemplo,
 onde o operador ```op1``` possui dois operandos: ```[op2 [a] [b]]``` e ```[c]```,  e o operator ```op2``` tem dois operandos: ```[a]``` e ```[b]```. 
 
 Assim, a expressão ```4 == (2 + 2)``` em C-, 
-é representada como ```[== 4 [+ 2 2]]``` na notação da AST.
+é representada como ```[== [4] [+ [2] [2]]]``` na notação da AST.
 
 ### Listas de nós que podem ser mostrados na AST
 
