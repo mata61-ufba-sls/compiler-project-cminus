@@ -3,28 +3,34 @@
 ## Parte III: Análise Semântica
 
 Nesta parte do projeto, você irá implementar um analisador semântico para a [linguagem C-](../../language/README.md).
-Na etapa de análise semântica, a árvore sintática abstrata AST criada pelo analisador sintático será visitada para realização de alguns tipos de análise para determinar a corretude semântica de programas em C-.
+Na etapa de análise semântica, a árvore sintática abstrata AST criada pelo analisador sintático será visitada para realização de alguns tipos de análise e verificação da corretude semântica de programas em C-.
 Referências para símbolos (nomes de variáveis e de funções) declarados devem ser definidas, os tipos de expressões devem ser inferidos, e a compatibilidade entre valores deve ser verificada. 
-Será necessário fazer a verificação com base nas regras de escopo e de tipo especificadas pela semântica da linguagem.  Consulte a especificação do projeto de linguagem e semântica associada à linguagem C-.  
+Será necessário fazer a verificação com base nas regras de escopo e de tipo especificadas pela semântica da linguagem.  Consulte a [especificação semântica associada à linguagem C-](../../language/cminus-03.md). 
 
-Recomendo fortemente que leia com atenção o conteúdo do Capítulo 7 – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain.
+Recomendo fortemente que leia com atenção o conteúdo do Capítulo 7 – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain. Apesar de algumas diferenças entre C- da linguagem B- usada no livro, os exemplos de código e o material podem ser úteis.
 
-+ [capítulo 7](../../resources/40-chapter7-Semantics.pdf);
++ [capítulo 7](../../resources/40-chapter7-semantics.pdf);
 
-The AST is used during semantic analysis by the compiler to check for correct usage of the elements of the language. The compiler also produces a symbol table based on the AST during semantic analysis. A complete traversal of the AST allows verification of the correctness of the program given the language specification. After verifying correctness, the AST serves as the base for code generation.
+A AST é usada durante a análise semantica pelo compilador para verificar o uso correto de elementos da linguagem.
+O compilador também cria e atualiza uma tabela de símbolos a partir de elementos da AST durante a análise semântica. 
+A AST deve ser percorrida/visitada para a verificação de tipos e outras análises.  
 
-In particular, in addition to the AST data structure, you will be using the symbol table for checking scope and language types.  Remember if your compiler finds any semantic error, it should stop and the output file should be empty. That means, the AST will not be written to the output file. Below we provide you with a non-exhaustive check list you should be looking into.
+Além da estrutura de dados usada na AST, vocês deverão usar a tabela de símbolos para verificação de escopo e de tipos.
 
-## Check List for Semantic Analysis (non exhaustive):
+Atenção: Se o seu compilador desenvolvido no Trabalho Prático 3 (TP3) encontrar algum erro semântico, ele deve interromper a compilação e o arquivo de saída deve ser **vazio**, isto é, a AST com colchetes *não* deve ser gravada no arquivo de saída de TP3.
+
+Considere a *checklist* não-exaustiva de erros semânticos que seu compilador deve implementar.
+
+## Checklist para Análise Semântica de C-:
 
 ```<program> ::= <declaration-list>
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
 <declaration> ::= <var-declaration> | <fun-declaration>
 ```  
 
-- [   ]  All variables and functions must be declared before they are used
+[   ]  All variables and functions must be declared before they are used
 
-- [   ]  The last declaration in a program needs to be a declaration of the form void main (void)
+[   ]  The last declaration in a program needs to be a declaration of the form void main (void)
 
 
 ``` 
@@ -32,7 +38,7 @@ In particular, in addition to the AST data structure, you will be using the symb
 <type-specifier> ::= int | void
 ```
 
-- [   ]  Variable declarations can only have int type.
+[   ]  Variable declarations can only have int type.
 
 
 ``` 
@@ -42,32 +48,32 @@ In particular, in addition to the AST data structure, you will be using the symb
 <param> ::= <type-specifier> ID | <type-specifier> ID [ ] 
 ```
 
-- [   ]  Parameter types for variable names cannot be void (except main function)
+[   ]  Parameter types for variable names cannot be void (except main function)
 
-- [   ]  Parameters followed by brackets are vector parameters to which the size is variable
+[   ]  Parameters followed by brackets are vector parameters to which the size is variable
 
-- [   ]  Parameters for arrays must match array-type variable during function call
+[   ]  Parameters for arrays must match array-type variable during function call
 
-- [   ]  Parameters for integer variables cannot be used as array references (array accesses/subscripts are valid, though)
+[   ]  Parameters for integer variables cannot be used as array references (array accesses/subscripts are valid, though)
 
-- [   ]  Non-array parameters should not match arrays (array accesses/subscripts are valid, however)
+[   ]  Non-array parameters should not match arrays (array accesses/subscripts are valid, however)
 
-- [   ]  Functions can be recursive (to the limit that declarations before-use allow)
+[   ]  Functions can be recursive (to the limit that declarations before-use allow)
 
 ```
 <compound-stmt> ::= { <local-declarations> <statement-list> }
 ``` 
 
-- [   ]  Variable declaration has the same scope as the set of statements in braces and overrides the visibility of global variables.
+[   ]  Variable declaration has the same scope as the set of statements in braces and overrides the visibility of global variables.
 
 
 ``` 
 <return-stmt> ::= return ; | return <expression> ;
 ``` 
 
-- [   ]  Functions not declared as void must return values.
+[   ]  Functions not declared as void must return values.
 
-- [   ]  Functions declared as void must not return values.
+[   ]  Functions declared as void must not return values.
 
 
 ``` 
@@ -75,24 +81,24 @@ In particular, in addition to the AST data structure, you will be using the symb
 <var> ::= ID | ID [ <expression> ]
 ``` 
 
-- [   ]  Variable must be declared.
+[   ]  Variable must be declared.
 
-- [   ]  Use of an array name anywhere is invalid except in arguments of function calls
+[   ]  Use of an array name anywhere is invalid except in arguments of function calls
 
-- [   ]  An expression to be assigned to a variable must refer to data value that is stored at some address in memory.  
+[   ]  An expression to be assigned to a variable must refer to data value that is stored at some address in memory.  
 
-- [   ]  Check correct assignments from return statements of void vs int functions
+[   ]  Check correct assignments from return statements of void vs int functions
 
-- [   ]  Type checking of the expressions vs variable types
+[   ]  Type checking of the expressions vs variable types
 
 
 ```
 <factor> ::= ( <expression> ) | <var> | <call> | NUM
 ``` 
 
-- [   ]  Check correct usage of function return
+[   ]  Check correct usage of function return
 
-- [   ]  Array variables must be indexed, except in expressions containing a single ID (function calls)
+[   ]  Array variables must be indexed, except in expressions containing a single ID (function calls)
 
 
 ```
@@ -102,9 +108,9 @@ In particular, in addition to the AST data structure, you will be using the symb
 ``` 
 
 
-- [  ]  Functions need to be declared before being called
+[  ]  Functions need to be declared before being called
 
-- [  ]  The number of arguments in a function call must be equal to the number of parameters in the declaration
+[  ]  The number of arguments in a function call must be equal to the number of parameters in the declaration
 
 
 ```
@@ -112,60 +118,60 @@ int input(void)  {...}
 void output(int x) {...}
 ```
 
-- [  ]  Make sure to include these names (builtin functions)
+[  ]  Make sure to include these names (builtin functions)
 
-- [  ]  Check return type, input, number of params.
+[  ]  Check return type, input, number of params.
 
 
 
 ### Other general checks
  
-- [  ]  Using a function name in a variable name context (and vice-versa) should be disallowed.
+[  ]  Using a function name in a variable name context (and vice-versa) should be disallowed.
 
-- [  ]  Function redeclared as function
+[  ]  Function redeclared as function
 
-- [  ]  Function redeclared as variable
+[  ]  Function redeclared as variable
 
-- [  ]  Function redeclared as parameter
+[  ]  Function redeclared as parameter
 
-- [  ]  Function redeclared as local variable (allowed)
+[  ]  Function redeclared as local variable (allowed)
 
-- [  ]  Variable redeclared as variable
+[  ]  Variable redeclared as variable
 
-- [  ]  Variable redeclared as function
+[  ]  Variable redeclared as function
 
-- [  ]  Variable redeclared as parameter
+[  ]  Variable redeclared as parameter
 
-- [  ]  Variable redeclared as local variable
+[  ]  Variable redeclared as local variable
 
-- [  ]  Parameter redeclared as parameter
+[  ]  Parameter redeclared as parameter
 
-- [  ]  Parameter redeclared as local variable
+[  ]  Parameter redeclared as local variable
 
-- [  ]  Parameter redeclared as local variable on inner scope (allowed)
+[  ]  Parameter redeclared as local variable on inner scope (allowed)
 
-- [  ]  Local variable redeclared as local variable on same scope
+[  ]  Local variable redeclared as local variable on same scope
 
-- [  ]  Local variable redeclared as local variable on inner scope (allowed)
+[  ]  Local variable redeclared as local variable on inner scope (allowed)
 
-- [  ]  There are no declarations
+[  ]  There are no declarations
 
-- [  ]  There is no main.
+[  ]  There is no main.
 
-- [  ]  The last declaration is not a function.
+[  ]  The last declaration is not a function.
 
-- [  ]  The last declaration name is not "main".
+[  ]  The last declaration name is not "main".
 
 [  ]  The last declaration does not return void.
 
 [  ]  The last declaration has more than zero params.
 
+## Organização do Trabalho Prático 3 (TP3)
 
-### Reference compiler (syntactic/semantic phase)
+Os códigos relacionados ao TP3 deverão ser colocados nas pastas: 
+- __src/symtable__: código relacionado ao gerenciamento da tabela de símbolos (TS)
+- __src/tchecker__: código relacionado às verificações listadas no *checklist* acima.
 
-Sample binary (Linux ELF 64-bit LSB executable, x86-64.
-
-If you're using Windows, you can install and use the Linux Ubuntu terminal! See this tutorial
-
-Input samples here.
-
+- Os arquivos compile.sh e run.sh devem ser colocados no diretório raiz do repositório de sua equipe;
+- O nome do arquivo executável gerado em compile.sh para o trabalho 3 deve ser **cminus**.
+- Ao encontrar algum erro semântico, seu compilador deve interromper a compilação e o arquivo de saída deve ser **vazio**, isto é, a AST com colchetes *não* deve ser gravada no arquivo de saída de TP3.
