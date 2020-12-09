@@ -1,8 +1,15 @@
-# Part III: Semantic Analysis
+# Projeto de um Compilador
 
-In this part of the project, you will implement the semantic phase of your compiler. The semantic phase will walk the AST and perform certain analysis to determine the correctness of the program. Symbol references (variable and function names) must be resolved to definitions, the type of expressions must be inferred, and the compatibility of values in context must be checked. This involves checking for scope and type rules as specified by the language semantics. Please refer here  to review our C- language design and semantics.  
+## Parte III: Análise Semântica
 
-Before you start, I recommend that you review the background material available on Chapter 7 – Semantic Analysis from the book "Introduction to Compilers and Language Design" by Douglas Thain.
+Nesta parte do projeto, você irá implementar um analisador semântico para a [linguagem C-](../../language/README.md).
+Na etapa de análise semântica, a árvore sintática abstrata AST criada pelo analisador sintático será visitada para realização de alguns tipos de análise para determinar a corretude semântica de programas em C-.
+Referências para símbolos (nomes de variáveis e de funções) declarados devem ser definidas, os tipos de expressões devem ser inferidos, e a compatibilidade entre valores deve ser verificada. 
+Será necessário fazer a verificação com base nas regras de escopo e de tipo especificadas pela semântica da linguagem.  Consulte a especificação do projeto de linguagem e semântica associada à linguagem C-.  
+
+Recomendo fortemente que leia com atenção o conteúdo do Capítulo 7 – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain.
+
++ [capítulo 7](../../resources/40-chapter7-Semantics.pdf);
 
 The AST is used during semantic analysis by the compiler to check for correct usage of the elements of the language. The compiler also produces a symbol table based on the AST during semantic analysis. A complete traversal of the AST allows verification of the correctness of the program given the language specification. After verifying correctness, the AST serves as the base for code generation.
 
