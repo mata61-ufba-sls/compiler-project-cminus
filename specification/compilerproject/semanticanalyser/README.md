@@ -9,6 +9,10 @@ Será necessário fazer a verificação com base nas regras de escopo e de tipo 
 
 Recomendo fortemente que leia com atenção o conteúdo do [capítulo 7](../../resources/40-chapter7-semantics.pdf) – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain. Apesar de algumas diferenças entre C- da linguagem B- usada no livro, os exemplos de código e o material podem ser úteis.
 
+- Outros recursos:
+   + [Livro gratuito e online compilerbook.org](https://www3.nd.edu/~dthain/compilerbook/) de Douglas Thain
+      + Codigos [hash.h e hash.c](https://github.com/dthain/compilerbook-examples/tree/master/starter-code)
+
 A AST é usada durante a análise semantica pelo compilador para verificar o uso correto de elementos da linguagem.
 O compilador também cria e atualiza uma tabela de símbolos a partir de elementos da AST durante a análise semântica. 
 A AST deve ser percorrida/visitada para a verificação de tipos e outras análises.  
