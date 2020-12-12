@@ -7,9 +7,11 @@ Na etapa de análise semântica, a árvore sintática abstrata AST criada pelo a
 Referências para símbolos (nomes de variáveis e de funções) declarados devem ser definidas, os tipos de expressões devem ser inferidos, e a compatibilidade entre valores deve ser verificada. 
 Será necessário fazer a verificação com base nas regras de escopo e de tipo especificadas pela semântica da linguagem.  Consulte a [especificação semântica associada à linguagem C-](../../language/cminus-03.md). 
 
-Recomendo fortemente que leia com atenção o conteúdo do Capítulo 7 – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain. Apesar de algumas diferenças entre C- da linguagem B- usada no livro, os exemplos de código e o material podem ser úteis.
+Recomendo fortemente que leia com atenção o conteúdo do [capítulo 7](../../resources/40-chapter7-semantics.pdf) – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain. Apesar de algumas diferenças entre C- da linguagem B- usada no livro, os exemplos de código e o material podem ser úteis.
 
-+ [capítulo 7](../../resources/40-chapter7-semantics.pdf);
+- Outros recursos:
+   + [Livro gratuito e online compilerbook.org](https://www3.nd.edu/~dthain/compilerbook/) de Douglas Thain
+      + Codigos [hash.h e hash.c](https://github.com/dthain/compilerbook-examples/tree/master/starter-code)
 
 A AST é usada durante a análise semantica pelo compilador para verificar o uso correto de elementos da linguagem.
 O compilador também cria e atualiza uma tabela de símbolos a partir de elementos da AST durante a análise semântica. 
