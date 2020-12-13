@@ -18,6 +18,7 @@ O objetivo deste projeto é promover a aquisição de experiência na implementa
 + [Parte II: Análise Sintática](./syntaxanalyser/README.md)
 + [Parte III: Análise Semântica](./semanticanalyser/README.md)
 + [Parte IV: Geração de Código](./codegenerator/README.md)
++ [Parte V: Otimização de Código](./codeoptimizer/README.md)
 
 
 -----
