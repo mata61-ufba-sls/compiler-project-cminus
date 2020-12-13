@@ -1,40 +1,54 @@
-Part III: Semantic Analysis
-In this part of the project, you will implement the semantic phase of your compiler. The semantic phase will walk the AST and perform certain analysis to determine the correctness of the program. Symbol references (variable and function names) must be resolved to definitions, the type of expressions must be inferred, and the compatibility of values in context must be checked. This involves checking for scope and type rules as specified by the language semantics. Please refer here  to review our C- language design and semantics.  
+# Projeto de um Compilador
 
-Before you start, I recommend that you review the background material available on Chapter 7 – Semantic Analysis from the book "Introduction to Compilers and Language Design" by Douglas Thain.
+## Parte III: Análise Semântica
 
-The AST is used during semantic analysis by the compiler to check for correct usage of the elements of the language. The compiler also produces a symbol table based on the AST during semantic analysis. A complete traversal of the AST allows verification of the correctness of the program given the language specification. After verifying correctness, the AST serves as the base for code generation.
+Nesta parte do projeto, você irá implementar um analisador semântico para a [linguagem C-](../../language/README.md).
+Na etapa de análise semântica, a árvore sintática abstrata AST criada pelo analisador sintático será visitada para realização de alguns tipos de análise e verificação da corretude semântica de programas em C-.
+Referências para símbolos (nomes de variáveis e de funções) declarados devem ser definidas, os tipos de expressões devem ser inferidos, e a compatibilidade entre valores deve ser verificada. 
+Será necessário fazer a verificação com base nas regras de escopo e de tipo especificadas pela semântica da linguagem.  Consulte a [especificação semântica associada à linguagem C-](../../language/cminus-03.md). 
 
-In particular, in addition to the AST data structure, you will be using the symbol table for checking scope and language types.  Remember if your compiler finds any semantic error, it should stop and the output file should be empty. That means, the AST will not be written to the output file. Below we provide you with a non-exhaustive check list you should be looking into.
+Recomendo fortemente que leia com atenção o conteúdo do [capítulo 7](../../resources/40-chapter7-semantics.pdf) – Semantic Analysis do livro "Introduction to Compilers and Language Design" de Douglas Thain. Apesar de algumas diferenças entre C- da linguagem B- usada no livro, os exemplos de código e o material podem ser úteis.
 
-Check List for Semantic Analysis (non exhaustive):
-<program> ::= <declaration-list>
+- Outros recursos:
+   + [Livro gratuito e online compilerbook.org](https://www3.nd.edu/~dthain/compilerbook/) de Douglas Thain
+      + Codigos [hash.h e hash.c](https://github.com/dthain/compilerbook-examples/tree/master/starter-code)
 
+A AST é usada durante a análise semantica pelo compilador para verificar o uso correto de elementos da linguagem.
+O compilador também cria e atualiza uma tabela de símbolos a partir de elementos da AST durante a análise semântica. 
+A AST deve ser percorrida/visitada para a verificação de tipos e outras análises.  
+
+Além da estrutura de dados usada na AST, vocês deverão usar a tabela de símbolos para verificação de escopo e de tipos.
+
+Atenção: Se o seu compilador desenvolvido no Trabalho Prático 3 (TP3) encontrar algum erro semântico, ele deve interromper a compilação e o arquivo de saída deve ser **vazio**, isto é, a AST com colchetes *não* deve ser gravada no arquivo de saída de TP3.
+
+Considere a *checklist* não-exaustiva de erros semânticos que seu compilador deve implementar.
+
+## Checklist para Análise Semântica de C-:
+
+```<program> ::= <declaration-list>
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
-
 <declaration> ::= <var-declaration> | <fun-declaration>
+```  
 
 [   ]  All variables and functions must be declared before they are used
 
 [   ]  The last declaration in a program needs to be a declaration of the form void main (void)
 
 
-
+``` 
 <var-declaration> ::= <type-specifier> ID ; | <type-specifier> ID [ NUM ] ;
-
 <type-specifier> ::= int | void
+```
 
 [   ]  Variable declarations can only have int type.
 
 
-
+``` 
 <fun-declaration> ::= <type-specifier> ID ( <params> ) <compound-stmt>
-
 <params> ::= <param-list> | void
-
 <param-list> ::= <param-list> , <param> | <param>
-
 <param> ::= <type-specifier> ID | <type-specifier> ID [ ] 
+```
 
 [   ]  Parameter types for variable names cannot be void (except main function)
 
@@ -48,27 +62,26 @@ Check List for Semantic Analysis (non exhaustive):
 
 [   ]  Functions can be recursive (to the limit that declarations before-use allow)
 
-
-
+```
 <compound-stmt> ::= { <local-declarations> <statement-list> }
+``` 
 
 [   ]  Variable declaration has the same scope as the set of statements in braces and overrides the visibility of global variables.
 
 
-
+``` 
 <return-stmt> ::= return ; | return <expression> ;
+``` 
 
 [   ]  Functions not declared as void must return values.
 
 [   ]  Functions declared as void must not return values.
 
 
-
+``` 
 <expression> ::= <var> = <expression> | <simple-expression>
-
 <var> ::= ID | ID [ <expression> ]
-
-...
+``` 
 
 [   ]  Variable must be declared.
 
@@ -81,32 +94,31 @@ Check List for Semantic Analysis (non exhaustive):
 [   ]  Type checking of the expressions vs variable types
 
 
-
+```
 <factor> ::= ( <expression> ) | <var> | <call> | NUM
+``` 
 
 [   ]  Check correct usage of function return
 
 [   ]  Array variables must be indexed, except in expressions containing a single ID (function calls)
 
 
-
+```
 <call> ::= ID ( <args> )
-
 <args> ::= <arg-list> | empty
-
 <arg-list> ::= <arg-list> , <expression> | <expression>
+``` 
 
 
-
-[   ]  Functions need to be declared before being called
+[  ]  Functions need to be declared before being called
 
 [  ]  The number of arguments in a function call must be equal to the number of parameters in the declaration
 
 
-
+```
 int input(void)  {...}
-
 void output(int x) {...}
+```
 
 [  ]  Make sure to include these names (builtin functions)
 
@@ -114,8 +126,8 @@ void output(int x) {...}
 
 
 
-Other general checks
-
+### Other general checks
+ 
 [  ]  Using a function name in a variable name context (and vice-versa) should be disallowed.
 
 [  ]  Function redeclared as function
@@ -156,10 +168,12 @@ Other general checks
 
 [  ]  The last declaration has more than zero params.
 
-Reference compiler (syntactic/semantic phase)
-Sample binary (Linux ELF 64-bit LSB executable, x86-64) here
+## Organização do Trabalho Prático 3 (TP3)
 
-If you're using Windows, you can install and use the Linux Ubuntu terminal! See this tutorial
+Os códigos relacionados ao TP3 deverão ser colocados nas pastas: 
+- __src/symtable__: código relacionado ao gerenciamento da tabela de símbolos (TS)
+- __src/tchecker__: código relacionado às verificações listadas no *checklist* acima.
 
-Input samples here.
-
+- Os arquivos compile.sh e run.sh devem ser colocados no diretório raiz do repositório de sua equipe;
+- O nome do arquivo executável gerado em compile.sh para o trabalho 3 deve ser **cminus**.
+- Ao encontrar algum erro semântico, seu compilador deve interromper a compilação e o arquivo de saída deve ser **vazio**, isto é, a AST com colchetes *não* deve ser gravada no arquivo de saída de TP3.

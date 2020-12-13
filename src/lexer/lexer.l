@@ -3,10 +3,14 @@
 %}
 
 %%
+"//".*  { /* ignore comment  */ }
+
 [0-9]+          { return NUM; }
-("if"|"else"|"int"|"return"|"while")    { return KEY; }
-[A-Za-z][A-Za-z0-9]*                    { return ID; }
-"//"[^/\n]+"\n" { }
+
+("else"|"if"|"int"|"return"|"void"|"while")  { return KEY; }
+
+[A-Za-z][A-Za-z0-9]* { return ID; }
+
 "!="            { return SYM; }
 "="             { return SYM; }
 "=="            { return SYM; }
@@ -20,10 +24,15 @@
 ")"             { return SYM; }
 "{"             { return SYM; }
 "}"             { return SYM; }
+"["             { return SYM; }
+"]"             { return SYM; }
 "+"             { return SYM; }
 "-"             { return SYM; }
 "*"             { return SYM; }
 "/"             { return SYM; }
-[ \t\n]         { }
+
+[ \t]   { /* ignore white space */ }
+[\n]    { /* ignore white space and count lines, if you want */ }
+
 .               { return ERROR; }
 %%
