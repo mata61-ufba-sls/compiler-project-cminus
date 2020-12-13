@@ -1,6 +1,6 @@
 # Projeto de Compilador
 
-## Part V: Code Optimization
+## Parte V: Otimização de Código
 
 This extra credit programming assignment is intended to be a fun project with which to end the quarter. 
 For this extra credit assignment, your goal is to implement some optimizations in your compiler.
@@ -16,10 +16,12 @@ The total extra credit for doing optimization will not exceed 10% of the total g
 You need to include a short description of your optimizations in a README text file associated with your submission.
 Under absolutely no circumstances should you try optimization before your code generator is finished!
 
-## Code Optimizer
+## Otimizador de Código
 
-The code generation technique we presented in the lecture is correct but can lead to highly suboptimal code, including many redundant computations, excessive loads and stores to memory/stack, inefficient use of the registers, etc.
-Extra credit will be awarded for projects that, in addition to code generation, perform some significant optimization of the code. The amount of extra credit depends on how well the optimization is written, documented, and demonstrated. Two critical factors are
+The code generation technique we presented in the lecture is correct but can lead to highly suboptimal code, 
+including many redundant computations, excessive loads and stores to memory/stack, inefficient use of the registers, etc.
+Extra credit will be awarded for projects that, in addition to code generation, perform some significant optimization of the code. 
+The amount of extra credit depends on how well the optimization is written, documented, and demonstrated. Two critical factors are
 
 - correctness (the optimizations don’t result in incorrect programs); and
 - the percentage speed-up your optimized code achieves over our reference compiler, as measured by a weighted sum of the instructions executed on spim over a suite of benchmarks of our choosing. 
@@ -31,7 +33,9 @@ A relatively simple way to significantly improve the quality of naive code is to
 some local optimizations by identifying the fragments of the syntax tree that correspond to basic blocks. 
 For more detail, please refer to the following references:
 
-- Chapter 12 - Optimization from "Introduction to Compilers and Language Design" by Douglas Thain book;
-- Chapter 17 - Code Improvement from "Programming Language Pragmatics" by Michael L. Scott.
+- [Chapter 12](../../resources/chapter12-codeoptimization-DouglasThain.pdf) - Optimization from "Introduction to Compilers and Language Design" by Douglas Thain book;
+- [Chapter 17](../../resources/Scott 4e_Chapter 17.pdf) - Code Improvement from "Programming Language Pragmatics" by Michael L. Scott.
 
+---
+ 
 - Material cedido pelo Prof. Vinicius Petrucci.
