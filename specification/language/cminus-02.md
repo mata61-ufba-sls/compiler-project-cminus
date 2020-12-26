@@ -31,9 +31,9 @@
 ```
 <compound-stmt> ::= { <local-declarations> <statement-list> }
 
-<local-declarations> ::= <local-declarations> <var-declaration> | empty
+<local-declarations> ::= <local-declarations> <var-declaration> | /* empty */
 
-<statement-list> ::= <statement-list> <statement> | empty
+<statement-list> ::= <statement-list> <statement> | /* empty */
 
 <statement> ::= <expression-stmt> | <compound-stmt> | <selection-stmt> 
 
@@ -74,7 +74,7 @@
 
 <call> ::= ID ( <args> )
 
-<args> ::= <arg-list> | empty
+<args> ::= <arg-list> | /* empty */
 
 <arg-list> ::= <arg-list> , <expression> | <expression>
 
