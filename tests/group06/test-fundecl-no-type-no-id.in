@@ -1,5 +1,0 @@
-(void)
-{
-}
-
-void main(void) {}
