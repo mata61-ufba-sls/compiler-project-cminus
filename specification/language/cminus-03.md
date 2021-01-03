@@ -1,9 +1,13 @@
+# A Linguagem C-
+
 ## Aspectos Semânticos
 
 Para cada regra gramatical, será apresentada uma breve descrição da semântica associada.
 
 ```<program> ::= <declaration-list>
+
 <declaration-list> ::= <declaration-list> <declaration> | <declaration>
+
 <declaration> ::= <var-declaration> | <fun-declaration>
 ```  
 
@@ -12,16 +16,19 @@ A program consists of a list (or sequence) of declarations, which may be functio
 
 ``` 
 <var-declaration> ::= <type-specifier> ID ; | <type-specifier> ID [ NUM ] ;
+
 <type-specifier> ::= int | void
 ```
-  
   
 A variable declaration declares either a simple variable of integer type or an array variable whose base type is integer, and whose indices range from 0  . . NUM-1. Note that in C- the only basic types are integer and void. In a variable declaration, only the type specifier int can be used. Void is for function declarations (see below). Note, also, that only one variable can be declared per declaration.
 
 ``` 
 <fun-declaration> ::= <type-specifier> ID ( <params> ) <compound-stmt>
+
 <params> ::= <param-list> | void
+
 <param-list> ::= <param-list> , <param> | <param>
+
 <param> ::= <type-specifier> ID | <type-specifier> ID [ ] 
 ```
   
@@ -33,14 +40,16 @@ A function declaration consists of a return type specifier, an identifier, and a
 A compound statement is executed by executing the statement sequence in the order given. The local declarations have scope equal to the statement list of the compound statement and supersede any global declarations. 
 
 ```
-<local-declarations> ::= <local-declarations> <var-declaration> | empty
-<statement-list> ::= <statement-list> <statement> | empty
+<local-declarations> ::= <local-declarations> <var-declaration> | /* empty */
+
+<statement-list> ::= <statement-list> <statement> | /* empty */
 ```
 Note that both declarations and statement lists may be empty. (The non-terminal empty stands for the empty string (epsilon), sometimes written as ε).
 
 ```
 <statement> ::= <expression-stmt> | <compound-stmt> | <selection-stmt> 
               | <iteration-stmt> | <return-stmt>
+
 <expression-stmt> ::= <expression> ; | ;
 ``` 
 An expression statement has an optional expression followed by a semicolon. Such expressions are usually evaluated for their side effects. Thus, this statement is used for assignments and function calls.
@@ -65,6 +74,7 @@ A return statement may either return a value or not. Functions not declared void
 
 ```
 <expression> ::= <var> = <expression> | <simple-expression>
+
 <var> ::= ID | ID [ <expression> ]
 ```
 
@@ -74,6 +84,7 @@ Variables represent a further restriction of C- from C. In C the target of an as
 ```
 <simple-expression> ::= <additive-expression> <relop> <additive-expression> 
                       | <additive-expression>
+
 <relop> ::= <= | < | > | >= | == | !=
 ```
 
@@ -81,8 +92,11 @@ A simple expression consists of relational operators that do not associate (that
 
 ```
 <additive-expression> ::= <additive-expression> <addop> <term> | <term>
+
 <addop ::= + | -
+
 <term> ::= <term> <mulop> <factor> | <factor>
+
 <mulop> ::= * | /
 ```
 
@@ -96,7 +110,9 @@ A factor is an expression enclosed in parentheses, a variable, which evaluates t
 
 ```
 <call> ::= ID ( <args> )
-<args> ::= <arg-list> | empty
+
+<args> ::= <arg-list> | /* empty */
+
 <arg-list> ::= <arg-list> , <expression> | <expression>
 ```
 
@@ -106,7 +122,13 @@ Finally, the above rules give no input or output statement. We must include such
 
 ```
 int input(void)  {...}
+
 void output(int x) {...}
 ```
 
 The input function has no parameters and returns an integer value from the standard input device (usually the keyboard). The output function takes one integer parameter, whose value it prints to the standard output (usually the screen), together with a newline.
+
+-----
+Adaptação com base no material cedido pelo Prof. Vinicius Petrucci.
+
+
