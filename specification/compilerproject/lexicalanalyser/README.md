@@ -16,7 +16,8 @@ Em sua implementação do analisador léxico, considere as seguintes classes de 
 
 __ID__      Identificador  
 __NUM__     Literal decimal (integer)  
-__KEY__     Keyword (palavra-chave) 
+__KEY__     Keyword (palavra-chave)
+
 __SYM__     Símbolo Léxico  
 __ERROR__   Lexema do primeiro erro encontrado
 
